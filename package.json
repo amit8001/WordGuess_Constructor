@@ -1,0 +1,27 @@
+{
+  "name": "wordguess_constructor",
+  "version": "1.0.0",
+  "description": "Wordguess using JS Constructors",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amit8001/WordGuess_Constructor.git"
+  },
+  "keywords": [
+    "wordguess",
+    "constructors"
+  ],
+  "author": "Me",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amit8001/WordGuess_Constructor/issues"
+  },
+  "homepage": "https://github.com/amit8001/WordGuess_Constructor#readme",
+  "dependencies": {
+    "inquirer": "^6.0.0",
+    "is-letter": "^1.1.1"
+  }
+}

@@ -1,56 +1,44 @@
-// Word.js: Contains a constructor, Word that depends on the Letter constructor. 
-// This is used to create an object representing the current word the user is attempting to guess. 
-// That means the constructor should define:
+//require letter.js to use the Letter constructor function
+var Letter = require("./letter.js");
 
-// An array of new Letter objects representing the letters of the underlying word
-// A function that returns a string representing the word. This should call the function on each letter object
-//  (the first function defined in Letter.js) that displays the character or an underscore and concatenate those together.
-// A function that takes a character as an argument and calls the guess function on each letter object 
-// (the second function defined in Letter.js)
+//defining the Word constructor function
+function Word(word) {
+  this.word = word;
+  this.letters = [];
 
-//Word depends on the Letter constructor. So, we need to require Letter so that we can use it in the Word.js file (this file).
-var Letter = require("./Letter.js");
+  //this function splits the word when created of type Word, into letters and each letter in that word becomes a new Letter object
+  // and it has access to the properties and methods defined in the letter object
+  //we also push those letter objects to an array.
+  this.generateLetters = function() {
+    let wordArr = this.word.split("");
+    for(let i = 0; i < wordArr.length; i++) {
+      let newLetter = new Letter(wordArr[i]);
+      this.letters.push(newLetter);
+    }
+  }
 
-var Word = function(myWord) {
-	//Take chosen word from word list.
-	this.myWord = myWord;
-	//This is an array of letters representing the letters of the random chosen word.
-	this.letters = [];
-	//This is an array of underscores representing the number of underscores needed for the random chosen word 
-	//This is based on the number of letters in the word.
-	this.underscores = [];
-	//After we get a random word from the word list, I think I need to use the split method to add the letters to the this.letters array.
-	this.splitWord = function() {
-		this.letters = this.myWord.split("");
-		console.log(this.letters);
-		//Determine number of underscores needed based on length of this.letters array in the Word constructor.
-		numberUnderscoresNeeded = this.letters.length;
-		console.log("Underscores: " + numberUnderscoresNeeded);
-		//Create for loop that pushes the underscores to the this.underscores array in Word constructor.
-		 for (var i=0; i < numberUnderscoresNeeded; i++ ) {
-		this.underscores.push("_ ");
-		 }
-		console.log(this.underscores);
-		//Use the .join method to join each underscore that we pushed to the this.underscores array by a space.
-		console.log(this.underscores.join(" "));
-	}
-	this.generateLetters = function() {
-		for (i=0; i < this.letters.length; i++){
-			this.letters[i] = new Letter (this.letters[i]);
-			//this.letters[i].letterGuessedCorrectly = true;
-			//This line of code shows the super array of letter objects for debugging purposes.
-			//console.log(this.letters[i]);
-			
-			this.letters[i].guess_correct_fn(this.letters[i].character);
-			this.letters[i].showCharacter();
-		}
-	}
+
+  //In this function for each of those letter objects in that array populated from above, 
+  //we call guess_correct function by passing a "letter" as an argument.
+  //So in word PASTA, this becomes like this.letters array becomes [{P object},{A object},{S object},{T object},{A object}]
+  this.Guess = function(guess) {
+    for (var i= 0; i<this.letters.length; i++){
+      //the below line compares the letter passed by user say e.g. "A" to the this.letter property for that letter object,
+      //(in our case this.letter for "P object" is "P"). 
+      // As this is in a for loop, it loops through every letter object (starting with "P object")in that word and compares 
+        this.letters[i].guess_correct(guess);
+    }
+
+  }
+
+  //function to show word
+  this.showWord = function() {
+    let printedWord = "";
+    this.letters.forEach(letter => {
+      printedWord += letter.showCharacter() + " ";
+    });
+    return printedWord;
+  }
 }
 
-//test word constructor. Test successful.
-var someWord = new Word ("Amitav");
- someWord.splitWord();
- someWord.generateLetters();
-
-//Export the Word constructor so that we can use/reference it in index.js.
 module.exports = Word;
