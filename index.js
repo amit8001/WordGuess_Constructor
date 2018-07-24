@@ -103,14 +103,14 @@ function makeGuess() {
             if (guesses > 0 && checker.indexOf("_") !== -1) {
                 ctr++;
             //    console.log("updated ctr***" + ctr);
-
-                if (guesses === 0) {
+                 makeGuess();
+            }
+             else if (guesses === 0) {
                     console.log("You ran out of guesses! GAME OVER.");
                     continuePrompt();
-                } else {
-                    makeGuess();
-                }
-            } else {
+                } 
+                
+            else {
                 console.log("CONGRATULATIONS! You guessed the word correctly!");
                 console.log(word.showWord());
                 playGame();
