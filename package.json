@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/amit8001/WordGuess_Constructor#readme",
   "dependencies": {
-    "inquirer": "^6.0.0",
-    "is-letter": "^1.1.1"
+    "inquirer": "^6.0.0"
   }
 }
